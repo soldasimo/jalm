@@ -20,4 +20,14 @@ Vagrant.configure("2") do |config|
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
   config.vm.define :jenkins do |jenkins|
   end
+
+  # Install python-simplejson before provisioning with Ansible
+  # see https://github.com/plone/ansible-playbook/issues/82
+  config.vm.provision "shell", inline: "apt-get update"
+  config.vm.provision "shell", inline: "apt-get install python-simplejson"
+
+  # Ansible provisioner
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/playbook.yml"
+  end
 end

@@ -1,0 +1,9 @@
+---
+ntp_timezone: Europe/Dublin
+
+firewall_allowed_tcp_ports:
+  - "22"
+  - "8080"
+
+jenkins_admin_username: admin
+jenkins_admin_password: admin

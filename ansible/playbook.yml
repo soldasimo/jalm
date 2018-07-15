@@ -1,0 +1,19 @@
+---
+- hosts: jenkins
+  gather_facts: yes
+  become: true
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.ntp
+    - geerlingguy.git
+    - geerlingguy.java
+    - geerlingguy.jenkins
+
+  post_tasks:
+    - name: Check Jenkins is up and running
+      uri:
+        url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:8080"
