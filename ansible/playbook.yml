@@ -14,11 +14,12 @@
     - geerlingguy.jenkins
     - tecris.maven
     - geerlingguy.ansible
+    - jenkins-setup
 
-  post_tasks:
-    - name: Check Jenkins is up and running
-      uri:
-        url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:8080"
+      #  post_tasks:
+      #    - name: Check Jenkins is up and running
+      #      uri:
+      #        url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:8080"
 
 - hosts: app
   gather_facts: yes

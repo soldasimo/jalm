@@ -13,6 +13,7 @@ jenkins_plugins: [
 	'git', 
 	'github', 
 	'pipeline-utility-steps',
+        'python-jenkins',
 	'disk-usage',
 	'ws-cleanup'
 ]

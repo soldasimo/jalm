@@ -1,0 +1,59 @@
+---
+
+#- name: Update and upgrade debian packages
+#  become: true
+#  apt:
+#    upgrade: yes
+#    update_cache: yes
+#    cache_valid_time: 600
+#
+#- name: install packages for Ansible to manage Jenkins
+#  apt:
+#    pkg: "{{ item }}"
+#    state: latest
+#    update_cache: yes
+#    cache_valid_time: 600
+#  with_flattened:
+#    - python-jenkins
+#    - python-lxml
+
+# Issue with Ansible native module
+#- jenkins_job:
+#config: "default/foo.xml"
+#name: foo
+#password: "{{ jenkins_admin_password }}"
+#url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:8080"
+#user: "{{ jenkins_admin_password }}"
+
+- name: download Jenkins CLI
+  get_url:
+    url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:8080/jnlpJars/jenkins-cli.jar "
+    dest: /usr/local/bin/jenkins-cli.jar
+    mode: 0644
+
+- name: copy Jenkins jobs definitions
+  copy:
+    src: "default/{{ item }}"
+    dest: "/tmp/{{ item }}"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+  with_items:
+    - "hello.xml"
+
+- name: delete managed Jenkins jobs
+  shell: "java -jar /usr/local/bin/jenkins-cli.jar -s http://192.168.1.10:8080 -auth 'admin:admin' delete-job {{ item }}"
+  with_items:
+    - "hello"
+  # TODO -- improve e.g. "ERROR: No such job 'delme'"
+  ignore_errors: true
+
+- name: create managed Jenkins jobs
+  shell: "java -jar /usr/local/bin/jenkins-cli.jar -s http://192.168.1.10:8080 -auth 'admin:admin' create-job {{ item }} < /tmp/{{ item }}.xml"
+  with_items:
+    - "hello"
+  ignore_errors: true
+
+- name: give Jenkins some air before handlers restart it
+  pause:
+    seconds: 5
