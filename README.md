@@ -28,6 +28,7 @@ ansible-galaxy install -r requirements.yml
 Create and provision Vagrant box:
 
 ```
+vagrant plugin install vagrant-hostmanager
 vagrant up
 ```
 

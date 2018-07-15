@@ -5,8 +5,17 @@ firewall_allowed_tcp_ports:
   - "22"
   - "8080"
 
+jenkins_package_state: latest
 jenkins_admin_username: admin
 jenkins_admin_password: admin
+jenkins_plugins: [
+	'ansible', 
+	'git', 
+	'github', 
+	'pipeline-utility-steps',
+	'disk-usage',
+	'ws-cleanup'
+]
 
 maven_major: 3
 maven_version: 3.5.4
