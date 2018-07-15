@@ -1,0 +1,12 @@
+---
+
+- name: add docker group
+  group:
+    name: docker
+
+- name: add docker user
+  user:
+    name: docker
+    group: docker
+    groups: sudo
+    append: yes

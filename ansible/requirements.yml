@@ -6,3 +6,6 @@
 - src: geerlingguy.jenkins
 - src: tecris.maven
 - src: geerlingguy.ansible
+- src: geerlingguy.pip
+- src: geerlingguy.docker
+
