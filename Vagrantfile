@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
   # Install python-simplejson before provisioning with Ansible
   # see https://github.com/plone/ansible-playbook/issues/82
   config.vm.provision "shell", inline: "apt-get update"
-  config.vm.provision "shell", inline: "apt-get install python-simplejson"
+  config.vm.provision "shell", inline: "apt-get install -y python-simplejson"
 
   # Ansible provisioner
   config.vm.provision "ansible" do |ansible|
