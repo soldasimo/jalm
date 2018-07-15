@@ -36,3 +36,5 @@ Connect to Jenkins:
 
 - http://192.168.1.10:8080/
 - l/p: admin/admin		(can be set in [ansible/vars/main.yml](ansible/vars/main.yml))
+
+Run the [hello](http://192.168.1.10:8080/job/hello/) pipeline.
