@@ -12,6 +12,7 @@
     - geerlingguy.git
     - geerlingguy.java
     - geerlingguy.jenkins
+    - tecris.maven
 
   post_tasks:
     - name: Check Jenkins is up and running
